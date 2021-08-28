@@ -1,0 +1,83 @@
+schema: '2.0'
+stages:
+  preprocessing:
+    cmd: python3 preprocess.py
+    deps:
+    - path: ../DVCDemoData/raw_data.csv
+      md5: 64bc2cc8d1498e3028e87ffe5231c8fc
+      size: 188672
+    - path: preprocess.py
+      md5: 7df97f705cc2c82ddaa97698ee39bd03
+      size: 2720
+    - path: utils.py
+      md5: 0622bd594e7efe9ad47e4041624c3df8
+      size: 1985
+    params:
+      params.yaml:
+        preprocessing.random_state: 42
+        preprocessing.test_share: 0.2
+    outs:
+    - path: ../DVCDemoData/test.csv
+      md5: b469f471205ef601f7070ec39be91af1
+      size: 8132
+    - path: ../DVCDemoData/train.csv
+      md5: eebed44fc61d6fce0f8ad40fc91df1d4
+      size: 32495
+  training:
+    cmd: python3 train.py
+    deps:
+    - path: ../DVCDemoData/train.csv
+      md5: eebed44fc61d6fce0f8ad40fc91df1d4
+      size: 32495
+    - path: train.py
+      md5: bc27af5625468dbee757e0a1f8e6d77a
+      size: 3464
+    - path: utils.py
+      md5: 0622bd594e7efe9ad47e4041624c3df8
+      size: 1985
+    params:
+      params.yaml:
+        training.model:
+          method: naive_bayes
+          type: GaussianNB
+          parameters: None
+        training.preprocessor:
+          type: StandardScaler
+    outs:
+    - path: ../DVCDemoModels/model.pickle
+      md5: 2c64cfdf3d524807d8673c8f35370ac7
+      size: 591
+    - path: ../DVCDemoModels/preprocessor.pickle
+      md5: 24b328c5c35b4983f605102aa28ca02e
+      size: 489
+    - path: ../DVCDemoModels/train_report.yml
+      md5: 18f5b5a36247fdbf4a1751630d1ef8e8
+      size: 376
+    - path: ../DVCDemoModels/visualization_train.png
+      md5: d7709c28b55e73d02c9b05fa955b87c9
+      size: 468554
+  testing:
+    cmd: python3 test.py
+    deps:
+    - path: ../DVCDemoData/test.csv
+      md5: b469f471205ef601f7070ec39be91af1
+      size: 8132
+    - path: ../DVCDemoModels/model.pickle
+      md5: 2c64cfdf3d524807d8673c8f35370ac7
+      size: 591
+    - path: ../DVCDemoModels/preprocessor.pickle
+      md5: 24b328c5c35b4983f605102aa28ca02e
+      size: 489
+    - path: test.py
+      md5: 5c104eb01979f2db4329f85641d8afd0
+      size: 2600
+    - path: utils.py
+      md5: 0622bd594e7efe9ad47e4041624c3df8
+      size: 1985
+    outs:
+    - path: ../DVCDemoModels/test_report.yml
+      md5: 4aaed38871f4c5cea122d964c7970982
+      size: 248
+    - path: ../DVCDemoModels/visualization_test.png
+      md5: 588ac43fd3cc4638636a857bf7e64c0e
+      size: 235062
