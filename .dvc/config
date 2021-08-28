@@ -1,4 +1,6 @@
 [core]
     remote = localremote
+[cache]
+    dir = ../../DVCLocalCache
 ['remote "localremote"']
     url = ../../DVCLocalRemote
