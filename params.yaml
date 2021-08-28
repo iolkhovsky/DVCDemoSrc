@@ -1,0 +1,19 @@
+preprocessing:
+  data: ../DVCDemoData/raw_data.csv
+  output: ../DVCDemoData
+  test_share: 0.2
+  random_state: 42
+training:
+  dataset: ../DVCDemoData/train.csv
+  preprocessor:
+    type: StandardScaler
+  model:
+    method: naive_bayes
+    type: GaussianNB
+    parameters: None
+  output: ../DVCDemoModels
+testing:
+  dataset: ../DVCDemoData/test.csv
+  model: ../DVCDemoModels
+  output: ../DVCDemoModels
+
