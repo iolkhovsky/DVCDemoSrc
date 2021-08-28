@@ -1,0 +1,42 @@
+stages:
+  preprocessing:
+    cmd: python3 preprocess.py
+    deps:
+    - ../DVCDemoData/raw_data.csv
+    - preprocess.py
+    - utils.py
+    params:
+    - preprocessing.random_state
+    - preprocessing.test_share
+    outs:
+    - ../DVCDemoData/test.csv
+    - ../DVCDemoData/train.csv
+  training:
+    cmd: python3 train.py
+    deps:
+    - ../DVCDemoData/train.csv
+    - train.py
+    - utils.py
+    params:
+    - training.model
+    - training.preprocessor
+    outs:
+    - ../DVCDemoModels/model.pickle
+    - ../DVCDemoModels/preprocessor.pickle
+    - ../DVCDemoModels/visualization_train.png
+    metrics:
+      - ../DVCDemoModels/train_report.yml:
+          cache: false
+  testing:
+    cmd: python3 test.py
+    deps:
+    - ../DVCDemoData/test.csv
+    - test.py
+    - utils.py
+    - ../DVCDemoModels/model.pickle
+    - ../DVCDemoModels/preprocessor.pickle
+    outs:
+    - ../DVCDemoModels/visualization_test.png
+    metrics:
+      - ../DVCDemoModels/test_report.yml:
+          cache: false
