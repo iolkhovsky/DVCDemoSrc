@@ -4,8 +4,8 @@ stages:
     cmd: python3 preprocess.py
     deps:
     - path: ../DVCDemoData/raw_data.csv
-      md5: 4026f06094698f2d60afac8dc1e47eb5
-      size: 188782
+      md5: e334467bbe508b120fbf555bddbc83f0
+      size: 188837
     - path: preprocess.py
       md5: 7df97f705cc2c82ddaa97698ee39bd03
       size: 2720
@@ -18,17 +18,17 @@ stages:
         preprocessing.test_share: 0.2
     outs:
     - path: ../DVCDemoData/test.csv
-      md5: 321bbd0518309c8280aca086eaf1f6c3
-      size: 8150
+      md5: 54cc6fb8bb9db5d6fe5b45b86863964d
+      size: 8146
     - path: ../DVCDemoData/train.csv
-      md5: 30a263bec5b984301fb0db1693056f89
-      size: 32555
+      md5: d1c2a9aaf42c6394df9c131bbd8429d9
+      size: 32551
   training:
     cmd: python3 train.py
     deps:
     - path: ../DVCDemoData/train.csv
-      md5: 30a263bec5b984301fb0db1693056f89
-      size: 32555
+      md5: d1c2a9aaf42c6394df9c131bbd8429d9
+      size: 32551
     - path: train.py
       md5: bc27af5625468dbee757e0a1f8e6d77a
       size: 3464
@@ -45,28 +45,28 @@ stages:
           type: StandardScaler
     outs:
     - path: ../DVCDemoModels/model.pickle
-      md5: c24b065165acde12fd28c1364cd6d9a2
+      md5: fc32b2e66a404c72b0103ecd6cfcfd31
       size: 591
     - path: ../DVCDemoModels/preprocessor.pickle
-      md5: 09c3e3e8ed86c0a2f5edf0ec11c9c74e
+      md5: 0b54b242508f4a67ffad9313932497b9
       size: 489
     - path: ../DVCDemoModels/train_report.yml
-      md5: 2ba0dae6f6f6b356fe837caa21a5c191
-      size: 379
+      md5: d4d1a1fd84e98b82d8f8066923755900
+      size: 374
     - path: ../DVCDemoModels/visualization_train.png
-      md5: 9a0879d6e75ca501b722e843da2a60cf
-      size: 487720
+      md5: d4202ed712149700ad9e7d4d21ba9c7b
+      size: 497716
   testing:
     cmd: python3 test.py
     deps:
     - path: ../DVCDemoData/test.csv
-      md5: 321bbd0518309c8280aca086eaf1f6c3
-      size: 8150
+      md5: 54cc6fb8bb9db5d6fe5b45b86863964d
+      size: 8146
     - path: ../DVCDemoModels/model.pickle
-      md5: c24b065165acde12fd28c1364cd6d9a2
+      md5: fc32b2e66a404c72b0103ecd6cfcfd31
       size: 591
     - path: ../DVCDemoModels/preprocessor.pickle
-      md5: 09c3e3e8ed86c0a2f5edf0ec11c9c74e
+      md5: 0b54b242508f4a67ffad9313932497b9
       size: 489
     - path: test.py
       md5: 5c104eb01979f2db4329f85641d8afd0
@@ -76,8 +76,8 @@ stages:
       size: 1985
     outs:
     - path: ../DVCDemoModels/test_report.yml
-      md5: 092ca876e04aea2ef319b19bd1233beb
-      size: 248
+      md5: efad72cd1332e8573317c0a92e021324
+      size: 245
     - path: ../DVCDemoModels/visualization_test.png
-      md5: 3efade2575b55a0755a9488c79646664
-      size: 236497
+      md5: 43611d9a5033c0724e1e0babd5d96cdd
+      size: 234713
